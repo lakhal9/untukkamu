@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesan untuk Anda</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefefe;
+      min-height: 200vh;
+      padding: 40px;
+    }
+
+    .text-awal {
+      text-align: center;
+      max-width: 600px;
+      margin: auto;
+      font-size: 18px;
+    }
+
+    .popup {
+      position: fixed;
+      bottom: -100%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      opacity: 0;
+      transition: all 0.6s ease-out;
+      z-index: 10;
+    }
+
+    .popup.show {
+      bottom: 20%;
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .popup.shake {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(-50%) translateY(0); }
+      25% { transform: translateX(-50%) translateY(-5px); }
+      50% { transform: translateX(-50%) translateY(5px); }
+      75% { transform: translateX(-50%) translateY(-5px); }
+      100% { transform: translateX(-50%) translateY(0); }
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #333;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text-awal">
+    <p>Benarkah itu anda? Sudah lama tidak bertemu. Saya Robofla, sistem untuk menyampaikan pesan.</p>
+    <p>Mungkin pesan kali ini diciptakan berbeda, tapi rasa di dalamnya tetap sama, dengan saya lagi sebagai penyampainya. Hahah...</p>
+    <p>Oh iya, untuk permulaan, saya sampaikan: mulai sekarang, jika anda tidak menemui tombol maka coba scroll aja, dan jika anda menemukan tombol maka anda bisa memilih pilihan anda. Maaf ya, kemampuan saya hanya sebatas itu.</p>
+  </div>
+
+  <div id="popup" class="popup">
+    <p>wkwkwk.... Anda tidak berubah, tetap menjadi orang yang teliti.</p>
+    <button onclick="location.href='sambutan.html'">Lanjut</button>
+  </div>
+
+  <script>
+    let triggered = false;
+
+    window.addEventListener('scroll', () => {
+      if (triggered) return; // agar tidak berulang
+
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+
+      if (Math.ceil(scrolled) >= scrollable) {
+        triggered = true;
+
+        const popup = document.getElementById('popup');
+
+        // Tambah efek getar dulu
+        popup.classList.add('shake');
+
+        // Setelah delay 1 detik, tampilkan popup
+        setTimeout(() => {
+          popup.classList.remove('shake');
+          popup.classList.add('show');
+        }, 1000);
+      }
+    });
+  </script>
+
+</body>
+</html>

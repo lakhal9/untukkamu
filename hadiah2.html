@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hadiah 2</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      background-color: #fff7f0;
+    }
+
+    .scroll-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      height: 100vh;
+    }
+
+    .section {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 40px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      color: #5a3e36;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    video {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-lanjut {
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #8b5c4a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-lanjut:hover {
+      background: #a16655;
+    }
+
+    .section p {
+      font-size: 18px;
+      color: #5a3e36;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    ::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-container">
+
+    <!-- Instruksi awal -->
+    <div class="section">
+      <h2>Geser untuk melihat 👉</h2>
+      <p>dan terus geser sampai menemukan tombol. nikmati aja yaa 😊</p>
+      <p>oh iya, tekan play divideo untuk memulai videonya ya</p>
+    </div>
+
+    <!-- Video 1 -->
+    <div class="section">
+      <video controls>
+        <source src="video1.mp4" type="video/mp4">
+        Browser tidak mendukung video.
+      </video>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="section">
+      <video controls>
+        <source src="video2.mp4" type="video/mp4">
+        Browser tidak mendukung video.
+      </video>
+    </div>
+
+    <!-- Video 3 -->
+    <div class="section">
+      <video controls>
+        <source src="video3.mp4" type="video/mp4">
+        Browser tidak mendukung video.
+      </video>
+    </div>
+
+    <!-- Tombol Lanjut -->
+    <div class="section">
+      <p>Hehehe... kamu udah sampai sini ya 😄</p>
+      <a href="hadiah3.html"><button class="btn-lanjut">Lanjut untuk tambah banyak 🎁</button></a>
+    </div>
+
+  </div>
+
+</body>
+</html>

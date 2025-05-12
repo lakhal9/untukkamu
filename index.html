@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amplop Rahasia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" style="flex-direction: column;">
+      <div class="envelope" onclick="openEnvelope()">
+        <div class="flap"></div>
+        <div class="body"></div>
+        <div class="letter">Klik untuk membuka...</div>
+      </div>
+  
+      <div class="buttons hidden" id="buttons">
+        <button onclick="location.href='iya.html'">Iya</button>
+        <button onclick="location.href='tidak.html'">Tidak</button>
+      </div>
+    </div>
+  
+    <script>
+      function openEnvelope() {
+        document.querySelector('.envelope').classList.add('open');
+        document.querySelector('.letter').textContent = "Ayu?";
+        document.getElementById('buttons').classList.remove('hidden');
+      }
+    </script>
+    
+</body>
+</html>

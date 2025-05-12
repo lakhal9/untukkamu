@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selamat Ulang Tahun!</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #fff7f0;
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    .cake {
+      max-width: 300px;
+      margin: 20px auto;
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    .cake.show {
+      opacity: 1;
+    }
+
+    #message {
+      font-size: 18px;
+      color: #5a3e36;
+      margin-top: 20px;
+      min-height: 100px;
+      white-space: pre-wrap;
+    }
+
+    #after-text {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #after-text p {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .btn-lanjut {
+      padding: 10px 20px;
+      background: #8b5c4a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-lanjut:hover {
+      background: #a16655;
+    }
+
+    /* Overlay */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff7f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    #overlay p {
+      font-size: 22px;
+      color: #5a3e36;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay -->
+  <div id="overlay">
+    <p>🎉 Klik di mana saja untuk melihat</p>
+  </div>
+
+  <!-- Audio -->
+  <audio id="ultah-audio">
+    <source src="ultah.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Video Kue -->
+  <video id="cake" class="cake" autoplay muted loop playsinline width="300">
+    <source src="kue.mp4" type="video/mp4">
+  </video>
+
+  <!-- Efek Ketik -->
+  <div id="message"></div>
+
+  <!-- Setelah teks -->
+  <div id="after-text">
+    <p>kamu bisa lanjut untuk melihat beberapa lagi</p>
+    <a href="hadiah2.html"><button class="btn-lanjut">Lanjut</button></a>
+  </div>
+
+  <script>
+    const audio = document.getElementById('ultah-audio');
+    const overlay = document.getElementById('overlay');
+    const cakeVid = document.getElementById('cake');
+    const messageEl = document.getElementById('message');
+    const afterText = document.getElementById('after-text');
+
+    const messageText = 
+      "Cieeeeeeeee...... yang udah 18😊, Waktu berjalan cepat yaa....\n" +
+      "Terakhir saya mengucapkannya ketika anda berada di 15.\n" +
+      "udah dewasa aja 🥰.\n" +
+      "Oh iya, ada Pesan lagi dari tuanku : \n" +
+      "\n"+
+      "Aku ngga tau hubungan kita bakal sejauh dan selama apa \n" +
+      "yang aku tau, aku selalu bahagia sama kamu";
+
+    let i = 0;
+
+    function typeMessage() {
+      if (i < messageText.length) {
+        messageEl.textContent += messageText.charAt(i);
+        i++;
+        setTimeout(typeMessage, 60);
+      } else {
+        afterText.style.display = "block";
+      }
+    }
+
+    function startExperience() {
+      overlay.style.display = 'none';
+      audio.play().catch((e) => console.log("Audio tidak bisa diputar otomatis:", e));
+      cakeVid.classList.add("show");
+      setTimeout(typeMessage, 2000);
+    }
+
+    overlay.addEventListener('click', startExperience);
+  </script>
+
+</body>
+</html>

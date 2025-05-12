@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Yuk</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .love-instruction {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 18px;
+    }
+
+    #love-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .love-icon {
+      width: 50px;
+      height: 50px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+      background-size: cover;
+      position: absolute;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .result-section {
+      margin-top: 100vh;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .result-text {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .envelope {
+      position: relative;
+      width: 200px;
+      height: 150px;
+      background: #d2a679;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: 0.3s ease;
+      border-radius: 12px;
+    }
+
+    .envelope::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 75px;
+      background: #c9a16a;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      transform-origin: top;
+      transition: transform 0.6s ease;
+    }
+
+    .result-section.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body class="love-game">
+
+  <div class="love-instruction">
+    <p>Okee..... Kita lanjutkan aja, nggak usah mikiran pesan Tuanku, dia memang begitu. haha....</p>
+    <p style="margin-top: 15px;">Mending kita main Game deh, tugas anda adalah mencari gambar love dan memencetnya. silahkan mencoba</p>
+  </div>
+
+  <!-- Love container -->
+  <div id="love-container"></div>
+
+  <!-- Hasil dan hadiah -->
+  <div class="result-section hidden" id="result">
+    <p class="result-text">Anda benar-benar hebatt, Anda berhak mendapatkan hadiah 🎁</p>
+    <div class="envelope" onclick="window.location.href='hadiah.html'"></div>
+  </div>
+
+  <script>
+    const loveContainer = document.getElementById('love-container');
+    const resultSection = document.getElementById('result');
+
+    const TOTAL_LOVES = 5;
+    let collected = 0;
+
+    function createLove() {
+      const love = document.createElement('div');
+      love.classList.add('love-icon');
+
+      const x = Math.random() * (window.innerWidth - 60);
+      const y = Math.random() * 350;
+      love.style.left = `${x}px`;
+      love.style.top = `${y}px`;
+
+      love.onclick = () => {
+        love.remove();
+        collected++;
+        if (collected === TOTAL_LOVES) {
+          setTimeout(() => {
+            resultSection.classList.remove('hidden');
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+          }, 500);
+        }
+      };
+
+      loveContainer.appendChild(love);
+    }
+
+    for (let i = 0; i < TOTAL_LOVES; i++) {
+      createLove();
+    }
+  </script>
+
+</body>
+</html>

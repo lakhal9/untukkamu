@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lagu Spesial</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #111;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      padding: 20px;
+      cursor: pointer;
+    }
+
+    .image-container {
+      position: relative;
+      width: 90%;
+      max-width: 300px;
+      height: 200px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .photo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .photo.show {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .lyrics {
+      margin-top: 20px;
+      max-width: 90%;
+      font-size: 20px;
+      text-align: center;
+      min-height: 100px;
+    }
+
+    #nextBtn {
+      display: none;
+      margin: 40px auto;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .lyrics {
+        font-size: 18px;
+      }
+
+      #nextBtn {
+        font-size: 15px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="overlay" onclick="start()">
+    Klik di mana saja untuk mulai 🎵<br>(Pastikan suara aktif ya!)
+  </div>
+
+  <audio id="bgm" src="fallinginlove.mp3" preload="auto"></audio>
+
+  <div class="image-container">
+    <img src="img/foto1.jpg" class="photo" id="img1">
+    <img src="img/foto2.jpg" class="photo" id="img2">
+    <img src="img/foto3.jpg" class="photo" id="img3">
+    <img src="img/foto4.jpg" class="photo" id="img4">
+    <img src="img/foto5.jpg" class="photo" id="img5">
+    <img src="img/foto6.jpg" class="photo" id="img6">
+    <img src="img/foto7.jpg" class="photo" id="img7">
+  </div>
+
+  <div class="lyrics" id="lyricsBox"></div>
+
+  <button id="nextBtn" onclick="window.location.href='hadiah4.html'">Lanjut ke Hadiah 4 🎁</button>
+
+  <script>
+    const lyrics = [
+      {time: 1, text: "..."},
+      {time: 7, text: "wise man say"},
+      {time: 13, text: "Only fools rush in"},
+      {time: 20, text: "But I can't help"},
+      {time: 25, text: "Falling in love with you"},
+      {time: 34, text: "Shall I stay?"},
+      {time: 40, text: "Would it be a sin?"},
+      {time: 47, text: "If I can't help"},
+      {time: 53, text: "Falling in love with you"},
+      {time: 62, text: "Like a river flows"},
+      {time: 65, text: "Surely to the sea"},
+      {time: 68, text: "Darling, so it goes"},
+      {time: 72, text: "Some things are meant to be"},
+      {time: 79, text: "Take my hand"},
+      {time: 85, text: "Take my whole life too"},
+      {time: 92, text: "For I can't help"},
+      {time: 98, text: "Falling in love with you"},
+      {time: 107, text: "Like a river flows"},
+      {time: 110, text: "Surely to the sea"},
+      {time: 113, text: "Darling, so it goes"},
+      {time: 117, text: "Some things are meant to be"},
+      {time: 125, text: "Take my hand"},
+      {time: 130, text: "Take my whole life too"},
+      {time: 138, text: "For I can't help"},
+      {time: 144, text: "Falling in love with you"},
+      {time: 153, text: "For I can't help"},
+      {time: 157, text: "Falling in love with you"}
+    ];
+
+    const imageTimings = {
+      0: 1,
+      3: 2,
+      7: 3,
+      11: 4,
+      15: 5,
+      19: 6,
+      23: 7
+    };
+
+    const lyricsBox = document.getElementById('lyricsBox');
+    const audio = document.getElementById('bgm');
+    let lyricIndex = 0;
+    let imageIndex = 0;
+
+    function hideAllImages() {
+      document.querySelectorAll('.photo').forEach(img => img.classList.remove('show'));
+    }
+
+    function showImage(num) {
+      hideAllImages();
+      const img = document.getElementById(`img${num}`);
+      if (img) img.classList.add('show');
+    }
+
+    function start() {
+      document.querySelector('.overlay').style.display = 'none';
+      audio.play();
+      requestAnimationFrame(sync);
+    }
+
+    function sync() {
+      const current = audio.currentTime;
+
+      // Show lyrics
+      if (lyricIndex < lyrics.length && current >= lyrics[lyricIndex].time) {
+        typeLine(lyrics[lyricIndex].text);
+        lyricIndex++;
+      }
+
+      // Show image
+      if (imageTimings[lyricIndex - 1]) {
+        showImage(imageTimings[lyricIndex - 1]);
+      }
+
+      if (lyricIndex < lyrics.length) {
+        requestAnimationFrame(sync);
+      } else {
+        document.getElementById('nextBtn').style.display = 'block';
+      }
+    }
+
+    function typeLine(text) {
+      lyricsBox.innerHTML = "";
+      let i = 0;
+      function typeChar() {
+        if (i < text.length) {
+          lyricsBox.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeChar, 60);
+        }
+      }
+      typeChar();
+    }
+  </script>
+</body>
+
+</html>

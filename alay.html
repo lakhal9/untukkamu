@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Respons: Alay</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #3e2c23; /* Coklat tua */
+      background-image: url('love.png'); /* Gambar pattern love */
+      background-repeat: repeat;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .content-box {
+      background-color: #d8bca6;
+      color: white;
+      padding: 30px;
+      max-width: 700px;
+      margin: 100px auto 50px auto;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .scroll-hint {
+      height: 200px;
+    }
+
+    .continue-button {
+      display: none;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .continue-button button {
+      background-color: #d8bca6;
+      color: #3e2c23;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content-box">
+    <p>ututututu...... nggak ada yang alay buat kamuuu... orang bilang kamu sempurna aja nggak berlebihan kok. Hahaha...😍</p>
+  </div>
+  <!-- Tambahkan ini di antara kotak dan scroll trigger -->
+  <div style="height: 600px;"></div>
+
+  <div class="scroll-hint" id="scroll-point"></div>
+
+  <div class="continue-button" id="continue-button">
+    <button onclick="location.href='yuk.html'">Kita lanjut yuk 💌</button>
+  </div>
+
+
+  <script>
+    window.addEventListener("scroll", function () {
+      const trigger = document.getElementById("scroll-point");
+      const button = document.getElementById("continue-button");
+      if (trigger.getBoundingClientRect().top < window.innerHeight) {
+        button.classList.add("show");
+      }
+    });
+  </script>
+</body>
+</html>

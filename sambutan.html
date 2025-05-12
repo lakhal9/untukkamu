@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Sambutan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="text" id="first-text">
+      <p>Saya senang bertemu anda lagi, Sudah lama sejak terakhir kali saya berbicara dengan anda.</p>
+      <p>Maaf mengganggu waktu anda, jika anda sibuk, anda bisa keluar dulu dan membukanya lagi nanti.<br>Kesibukan anda lebih penting dari pesan ini.</p>
+    </div>
+
+    <div class="scroll-hint" id="scroll-trigger"></div>
+
+    <div class="text hidden" id="second-text">
+      <p>Oke, kita mulai yaa</p>
+      <button class="start-button" onclick="window.location.href='halamanberikutnya.html'">Mulai</button>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("scroll", function () {
+      const trigger = document.getElementById("scroll-trigger");
+      const secondText = document.getElementById("second-text");
+
+      const triggerTop = trigger.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (triggerTop < windowHeight) {
+        secondText.classList.remove("hidden");
+        secondText.classList.add("show");
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesan dari Tuan</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #f3e5dc; /* warna nyaman, coklat muda */
+      font-family: 'Segoe UI', sans-serif;
+      color: #3e2c23;
+    }
+
+    .highlight {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 40px 0 10px 0;
+    }
+
+    .small-note {
+      font-size: 8px;
+      position: absolute;
+      right: 20px;
+      bottom: 100px;
+      color: #6e5e54;
+    }
+
+    .medium-text {
+      font-size: 25px;
+      margin: 30px 0;
+      color: #4d3a2f;
+    }
+
+    .question-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .question-buttons button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #7b5e57;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .text {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="text show" id="first-text">
+      <p>Oke, untuk awal Saya diprogram untuk menyampaikan pesan dari tuan, dan ini adalah pesannya :</p>
+    </div>
+
+    <div class="scroll-hint" id="scroll-trigger-1"></div>
+
+    <div class="text hidden" id="second-text">
+      <p class="highlight">KAMU CANTIK, SUARAMU JUGA</p>
+      <p class="small-note">cuma kurang tinggi ajah, tapi malahan itu yang terbaik</p>
+      <p class="medium-text">Makasih udah Ada</p>
+    </div>
+
+    <div class="scroll-hint" id="scroll-trigger-2"></div>
+
+    <div class="text hidden" id="third-text">
+      <p>Bagaimana pendapat anda dengan pesannya?</p>
+      <div class="question-buttons">
+        <button onclick="window.location.href='payah.html'">Pesannya payah. Hhhh</button>
+        <button onclick="window.location.href='alay.html'">Alay</button>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("scroll", function () {
+      const t1 = document.getElementById("scroll-trigger-1");
+      const t2 = document.getElementById("scroll-trigger-2");
+      const sText = document.getElementById("second-text");
+      const tText = document.getElementById("third-text");
+
+      if (t1.getBoundingClientRect().top < window.innerHeight) {
+        sText.classList.remove("hidden");
+        sText.classList.add("show");
+      }
+      if (t2.getBoundingClientRect().top < window.innerHeight) {
+        tText.classList.remove("hidden");
+        tText.classList.add("show");
+      }
+    });
+  </script>
+
+</body>
+</html>
